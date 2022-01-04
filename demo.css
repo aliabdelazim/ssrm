@@ -1,0 +1,185 @@
+.main-container {
+    margin: 0%;
+    padding: 0px;
+}
+
+#map {
+    width: 100%;
+    height: calc(100vh - 60px);
+    margin-top: 60px;
+}
+
+.page-header {
+    display: flex;
+    flex-direction: row;
+    height: 60px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    background-color: cornflowerblue;
+}
+
+.right-panel-container {
+    position: absolute;
+    right: 15px;
+    top: 70px;
+    height: 700px;
+    width: 450px;
+    overflow:scroll;
+    background-color: aliceblue;
+    border-radius: 10px;
+    box-shadow: 3px 3px 3px 3px #888888;
+    display: flex;
+    flex-direction: column;
+}
+
+.table {
+    align-self: center;
+}
+
+table, th, td, tr {
+    border: 1px solid black;
+    border-collapse: collapse;
+
+}
+
+thead {
+    background-color: antiquewhite;
+}
+
+.left-panel-container {
+    position: absolute;
+    left: 10px;
+    top: 70px;
+    height: fit-content;
+    width: 250px;
+    background-color: aliceblue;
+    border-radius: 10px;
+    box-shadow: 3px 3px 3px 3px #888888;
+}
+
+.content {
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.input-form {
+   
+}
+
+label {
+    color: rgb(95, 95, 95);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-field {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+input {
+    align-self: center;
+    margin-bottom: 10px;
+    border: .2px solid darkgray;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+.actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 50px;
+}
+
+button {    
+    border: wheat;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: #547abd;
+}
+
+.action-btn {
+    border: wheat;
+    border-radius: 4px;
+    height: 30px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+
+h2 {
+    color: aliceblue;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    align-self: center;
+    margin-left: 20px;
+}
+
+button {
+    color: white;
+    background-color: cornflowerblue;
+}
+
+.panel-head {
+    text-align: center;
+    width: 100%;
+    border: 0px;
+}
+
+h4 {
+    font-family: Source Sans Pro;
+    font-style: normal;
+}
+
+thead {
+    align-self: center;
+    text-align: center;
+}
+
+.items-list {
+    padding-left: 0px;
+}
+
+ul {
+    list-style-type: none;
+   }
+   
+   ul li {
+     margin-top: 20px;
+     background-color:#F9FFFD;
+     padding: 10px;
+     border-radius: 10px;
+   }
+   
+   ul div {
+     display: inline-block;
+     max-width: 170px;
+   }
+   
+   ul img {
+     max-width: 70px;
+     vertical-align: top;
+   }
+   
+   ul div {
+    margin-left: 5px;
+   }
+   
+   ul div h2 {
+     margin: 0px;
+     font-weight: bold;
+     font-size: 14px;
+     color: #888888;
+   }
+   
+   ul div p {
+     margin: 0px;
+     font-style: italic;
+   }

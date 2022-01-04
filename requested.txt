@@ -1,0 +1,29 @@
+{
+    factories
+    [
+        {
+            lat:
+            lng:
+            Capacity:
+            Avaiablecapacity:
+        },
+        {
+            lat:
+            lng:
+            Capacity:
+            Avaiablecapacity:
+        },{
+            lat:
+            lng:
+            Capacity:
+            Avaiablecapacity:
+        }
+    ]
+    customer
+    {
+        lat:0,
+        lng:0,
+        requiredcapacity:
+        duration:10
+    }
+}
