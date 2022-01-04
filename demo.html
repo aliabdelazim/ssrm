@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
     <link rel="stylesheet" type="text/css" href="demo.css" />
     <link rel="stylesheet" type="text/css" href="styles.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   
@@ -20,15 +21,22 @@
   </head>
   <body id="markers-on-the-map" class="main-container">
     
-    <div class="page-header">
-      <img src="srm1.jpg" width="50px"  height="60px" alt="">
-      <h2>Saudi ready mix</h2>
+    
+    <div class="page-details" id="side-info-page">
+      <img class="logo" src="srm1.jpg" width="70px"  height="100px" alt="">
+      <input type="text" placeholder="search" id="search" class="input-field">
+
+      <div class="vehicles" id="vehicles">
+      </div>
     </div>
     
     <div id="map" #map></div>
     
    
     <script type="text/javascript" src='demo1.js'>
+    </script>
+
+    <script type="text/javascript" src='vehicles.js'>
     </script>
   </body>
 </html>
