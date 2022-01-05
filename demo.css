@@ -17,46 +17,56 @@
     position: absolute;
     z-index: 10;
     left: 0;
-    background-color: rgb(91, 105, 150);
+    background-color: #FBFCFE;
     margin-bottom: 10px;
 }
 
 .logo {
     margin-top: 20px;
     align-self: center;
-    border-radius: 10px;
-    border: 1px solid green;
+    border-radius: 50%;
+    border: 1px solid #DBEFFF;
 }
 
 .vehicles {
     overflow-y: scroll;
-    margin-top: 10px;
 }
 
 
 .vehicle-container {
     margin-top: 10px;
-    margin-bottom: 10px;
     background-color: #F7F8FC;
-    padding-bottom: 10px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
+    border: 1px solid #DBEFFF;
+    border-radius: 6px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .vehicle-name {
     margin-bottom: 0px;
-    font-weight: 500;
+    font-weight: 600;
     line-height: 1.8;
+    font-style: normal;
 }
 
 .trip-card {
     background-color: white;
     padding: 15px;
-    margin-left: 5px;
-    margin-right: 5px;
     padding-bottom: 5px;
-    margin-top: 10px;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
     box-shadow: 0px 0px 10px rgba(66, 80, 144, 0.2);
+}
+
+.trip-id {
+    font-weight: 600;
+    color: black;
+}
+
+a {
+    color: black;
 }
 
 .panel-head {
@@ -66,40 +76,47 @@
     align-items: center;
     padding-left: 10px;
     padding-right: 10px;
+    height: 50px;
     width: 100%;
     border: 0px;
     box-shadow: 0px 0px 10px rgba(66, 80, 144, 0.2);
 }
 
- /* Change background color of buttons on hover */
- .tab button:hover {
+/* Change background color of buttons on hover */
+.tab button:hover {
     background-color: #ddd;
-  }
-  
-  /* Create an active/current tablink class */
-  .tab button.active {
-    background-color: #ccc;
-  }
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background: #E5E5E5;
+}
 
 /* ----------------------------------*******************-------------------------------- */
 
 .input-field {
     margin-top: 20px;
-    margin-left: 3px;
-    margin-right: 3px;
+    margin-left: 10px;
+    margin-right: 10px;
     padding: 5px;
     padding-left: 10px;
     border: .1px solid green;
     border-radius: 3px;
-    box-shadow: 0px 0px 10px rgba(66, 80, 144, 0.4);
+    background: url(search-icon.svg) no-repeat scroll 7px 7px;
+    padding-left:30px;
+    box-shadow: 0px 5px 15px rgba(204, 204, 204, 0.15);
+    border: 1px solid #DBEFFF;
+    background-color: white;
 }
 
 h4 {
-
+    font-family: Lato;
+    font-style: normal;
 }
 
-label {
-    color: #888888;
+.trip-details {
+    color: black;
+    font-size: 12px;
 }
 
 thead {
