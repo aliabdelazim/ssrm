@@ -60,9 +60,45 @@
     box-shadow: 0px 0px 10px rgba(66, 80, 144, 0.2);
 }
 
+.trip-card-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0px;
+}
+
+.trip-id-container {
+    padding: 0px;
+    align-self: center;
+}
+
 .trip-id {
     font-weight: 600;
     color: black;
+}
+
+.onprogress-label {
+    border-radius: 2px;
+    padding: 0px 8px;
+    background: #e9f8ff;
+    color: #53b7e5;
+    font-weight: 600;
+    font-size: 0.5rem;
+    line-height: 18px;
+    height: fit-content;
+    transform: translateY(4px);
+}
+
+.completed-label {
+    border-radius: 2px;
+    padding: 0px 8px;
+    background-color: #bbed7c;
+    color: #6bb40e;
+    font-weight: 600;
+    font-size: 0.5rem;
+    line-height: 18px;
+    height: fit-content;
+    transform: translateY(4px);
 }
 
 a {

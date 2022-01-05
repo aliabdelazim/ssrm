@@ -15,6 +15,8 @@ fetch(
 .then((json1) => {
  json = json1;
  addVehicles();
+ handlingCollapse();
+ search();
 });
 
 
@@ -57,22 +59,30 @@ function addTripsToVehicle(vehicleTrips,vid) {
 function addTripDetails(trip,vid) {
     var datestart = new Date(trip.startTimeUTC);
     var dateeta = new Date(trip.etautc);
-    var tripContent =  '<p>'
-    tripContent += '<label class="trip-id"> Id : </label><span>' +  trip.id + '</span></br>';
-    tripContent += '<label class="trip-details"> Start Time : </label><span>' +  datestart.toString() + '</span></br>';
-    tripContent += '<label class="trip-details"> Loaded Capacity : </label><span>' +  trip.loadedCapacity + '</span></br>';
-    tripContent += '<label class="trip-details"> ETA" : </label><span>' +  dateeta.toString() + '</span></br>';
-    tripContent += '<label class="trip-details"> Distance (m) : </label><span>' +  trip.distanceInMeter + '</span></br>';
-    tripContent += `<label> Link : </label><a href="#" onclick=drawRoute(${trip.id},${vid})>Route</a>`;  
-    tripContent += '</p>';
+    var now = new Date().getTime();
+    var isInProgress = dateeta.getTime() > now;
+
+    var tripContent =  '<div>'
+    tripContent += '<div class="trip-card-header"><p class"trip-id-container"><label class="trip-id"> Id : </label><span class="trip-id">' +  trip.id + '</span></p>';
+                   isInProgress ? tripContent += '<span class="onprogress-label">onprogress</span></div>' : tripContent += '<span class="completed-label">completed</span></div>'
+    tripContent += '<label class="trip-details"> Start Time : </label><span class="trip-details">' +  
+                    datestart.getDate() + '/'+ datestart.getMonth()+1 + '/'+ datestart.getFullYear() + '-' +
+                    datestart.getUTCHours() + ':' + datestart.getMinutes() + '</span></br>';
+    tripContent += '<label class="trip-details"> Loaded Capacity : </label><span class="trip-details">' +  trip.loadedCapacity + '</span></br>';
+    tripContent += '<label class="trip-details"> ETA" : </label><span class="trip-details">' + 
+                     dateeta.getDate() + '/'+ dateeta.getMonth()+1 + '/'+ dateeta.getFullYear() + '-' +
+                     dateeta.getUTCHours() + ':' + dateeta.getMinutes() + '</span></br>';
+    tripContent += '<label class="trip-details"> Distance (m) : </label><span class="trip-details">' +  trip.distanceInMeter + '</span></br>';
+    tripContent += `<label> Link : </label><a href="#" class="trip-details" onclick=drawRoute(${trip.id},${vid})>Route</a>`;  
+    tripContent += '</div>';
     return tripContent
 }
 
 /**
  * managing collapsable
  */
+function handlingCollapse() {
   var coll = document.getElementsByClassName("collapsible");
-  
   for (var i = 0; i < coll.length; i++) {
     coll[i].addEventListener("click", function() {
       this.classList.toggle("active");
@@ -88,3 +98,33 @@ function addTripDetails(trip,vid) {
       }
     });
   }
+}
+
+function search() {
+  var searchInput = document.getElementById('search');
+  searchInput.addEventListener('change', function() {
+    var sidePage = document.getElementById('vehicles');
+    var searchValue = searchInput.value;
+    sidePage.innerHTML = '';
+    filteredVehicles = json.vehicleTrips.filter((vehicle)=> (vehicle.vehicleId.toString().includes(searchValue)));
+    addFilteredVehicles(filteredVehicles);
+
+  })
+}
+
+/**
+ * adds the list of vehicles collapsables
+ */
+ function addFilteredVehicles(filteredVehicles) {
+  var sidePage = document.getElementById('vehicles');
+  for ( var i = 0; i < filteredVehicles.length; i++) {
+      var panel = '<div id="panel" class="vehicle-container">';
+      panel+= '<button type="button" class="collapsible panel-head"><p class="vehicle-name">'
+      panel+= filteredVehicles[i].vehicleId + '-' + filteredVehicles[i].vehicleTypeId + '</p><i class="fa fa-minus"></i></button>'
+      panel+= '<div class="content" id="vehicle">'
+      panel+= addTripsToVehicle(filteredVehicles[i].trips,filteredVehicles[i].vehicleId)
+      panel+= '</div></div>'
+      sidePage.innerHTML += panel;
+  }
+}
+ 
