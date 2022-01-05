@@ -108,7 +108,7 @@ function search() {
     sidePage.innerHTML = '';
     filteredVehicles = json.vehicleTrips.filter((vehicle)=> (vehicle.vehicleId.toString().includes(searchValue)));
     addFilteredVehicles(filteredVehicles);
-
+    handlingCollapse();
   })
 }
 
