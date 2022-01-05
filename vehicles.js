@@ -74,7 +74,7 @@ function addVehicles() {
     for ( var i = 0; i < json.vehicles.length; i++) {
         var panel = '<div id="panel" class="vehicle-container">';
         panel+= '<button type="button" class="collapsible panel-head"><h4 class="vehicle-name">'
-        panel+= json.vehicles[i].name + ' trips list</h4></button>'
+        panel+= json.vehicles[i].name + ' trips list</h4><i class="fas fa-minus"></i></button>'
         panel+= '<div class="content" id="vehicle">'
         panel+= addTripsToVehicle(json.vehicles[i].trip)
         panel+= '</div></div>'
@@ -115,16 +115,19 @@ function addTripDetails(trip) {
  * managing collapsable
  */
   var coll = document.getElementsByClassName("collapsible");
-  var i;
   
-  for (i = 0; i < coll.length; i++) {
+  for (var i = 0; i < coll.length; i++) {
     coll[i].addEventListener("click", function() {
       this.classList.toggle("active");
       var content = this.nextElementSibling;
-      if (content.style.display === "block") {
+      if (content.style.display === "block" || content.style.display === "") {
         content.style.display = "none";
+        this.innerHTML += '<i class="fas fa-plus"></i>'
+        this.removeChild(this.childNodes[1]);  
       } else {
         content.style.display = "block";
+        this.innerHTML += '<i class="fas fa-minus"></i>'
+        this.removeChild(this.childNodes[1]);  
       }
     });
   }
