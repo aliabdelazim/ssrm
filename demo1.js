@@ -47,8 +47,9 @@ var mapContainer = document.getElementById('map'),
             var diff = (now - startTripTime) / 1000;
 
             found = true;
+            var linestring = new H.geo.LineString();
             for (var item in vehicleTrips[i].route) { 
-              var linestring = new H.geo.LineString();
+             
               var linesegment = vehicleTrips[i].route[item];
               if(shouldbelocation == false)
               {
@@ -67,14 +68,16 @@ var mapContainer = document.getElementById('map'),
               linesegment.routePoints.forEach(function(point) {
                 linestring.pushPoint(point);
               });
-      
-              // Initialize a polyline with the linestring:
-              var polyline = new H.map.Polyline(linestring, { style: { lineWidth: 2}});
-      
-              // Add the polyline to the map:
-              map.addObject(polyline);
             }
-            
+             // Initialize a polyline with the linestring:
+             var polyline = new H.map.Polyline(linestring, { style: { lineWidth: 2}});
+      
+             // Add the polyline to the map:
+             map.addObject(polyline);
+              // And zoom to its bounding rectangle
+             map.getViewModel().setLookAtData({
+               bounds: polyline.getBoundingBox()
+             });
             break;
           }
         }
