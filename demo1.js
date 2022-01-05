@@ -106,3 +106,14 @@ var mapContainer = document.getElementById('map'),
   
   // Create the default UI components
   var ui = H.ui.UI.createDefault(map, defaultLayers);
+
+  var x =document.getElementsByClassName('H_logo');
+  var y =document.getElementsByClassName('H_copyright');
+  
+    var j;
+    for (j = 0; j < x.length; j++) {
+        x[j].style.display = 'none';
+    }
+    for (j = 0; j < y.length; j++) {
+      y[j].style.display = 'none';
+  }
