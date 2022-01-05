@@ -22,34 +22,67 @@ var mapContainer = document.getElementById('map'),
     pixelRatio: window.devicePixelRatio || 1
   });
   
-  function drawRoute(){
+  function drawRoute(tripid,vid){
 
-        const url = 'http://localhost/ssrm/Response_SRM.json';
-        var points = [];
-    fetch(
-        url,
-        {
-            headers: { "Content-Type": "application/json" },         
-            method: "Get"
-        }
-    )
-    .then(data => data.json())
-    .then((json) => {
     
-      for (var item in json.routePointWithDetails) { 
-        var linestring = new H.geo.LineString();
-        var linesegment = json.routePointWithDetails[item];
-        linesegment.routePoints.forEach(function(point) {
-          linestring.pushPoint(point);
-        });
+    var found = false;
+    var shouldbelocation = false;
+    map.removeObjects(map.getObjects ())
+    const now = Date.now();
+    for ( var i = 0; i < json.vehicleTrips.length; i++) {
+      if(found == true)
+      {
+        break;
+      }
+      if(json.vehicleTrips[i].vehicleId == vid)
+      {
+        var vehicleTrips = json.vehicleTrips[i].trips
+      
+       
 
-        // Initialize a polyline with the linestring:
-        var polyline = new H.map.Polyline(linestring, { style: { lineWidth: 3}});
+        for (var i = 0; i < vehicleTrips.length; i++) {
+          if(vehicleTrips[i].id ==tripid)
+          {
+            var startTripTime =vehicleTrips[i].startTimeUTC
+            var diff = (now - startTripTime) / 1000;
 
-        // Add the polyline to the map:
-        map.addObject(polyline);
-      }  
-    });
+            found = true;
+            for (var item in vehicleTrips[i].route) { 
+              var linestring = new H.geo.LineString();
+              var linesegment = vehicleTrips[i].route[item];
+              if(shouldbelocation == false)
+              {
+                var time = vehicleTrips[i].route[item].time;
+                if(diff < time)
+                {
+                  shouldbelocation = true;
+                  var marker = new H.map.Marker({
+                    lat: linesegment.routePoints[0].lat,
+                    lng: linesegment.routePoints[0].lng
+                  });
+                  // add custom data to the marker                  
+                  map.addObject(marker);
+                }
+              }
+              linesegment.routePoints.forEach(function(point) {
+                linestring.pushPoint(point);
+              });
+      
+              // Initialize a polyline with the linestring:
+              var polyline = new H.map.Polyline(linestring, { style: { lineWidth: 2}});
+      
+              // Add the polyline to the map:
+              map.addObject(polyline);
+            }
+            
+            break;
+          }
+        }
+      }
+    }
+    
+     
+   
     // Define points to represent the vertices of a short route in Berlin, Germany:
      
      

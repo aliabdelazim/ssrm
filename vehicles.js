@@ -2,7 +2,7 @@
 let json;
 
 
-  const url = 'http://localhost/ssrm/response.json';
+  const url = './response.json';
   var points = [];
 fetch(
   url,
