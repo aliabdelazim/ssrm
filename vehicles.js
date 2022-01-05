@@ -1,7 +1,8 @@
 let json = {
     "vehicles": [
       {
-        "name": "Vechile 1",
+        "name": "VEHICLE",
+        "id": 1,
         "trip": [
           {
             "id": 1,
@@ -16,7 +17,8 @@ let json = {
         ]
       },
       {
-        "name": "Vechile 2",
+        "name": "VEHICLE",
+        "id": 2,
         "trip": [
           {
             "id": 1,
@@ -31,7 +33,8 @@ let json = {
         ]
       },
       {
-        "name": "Vechile 3",
+        "name": "VEHICLE",
+        "id": 3,
         "trip": [
           {
             "id": 1,
@@ -46,7 +49,8 @@ let json = {
         ]
       },
       {
-        "name": "Vechile 4",
+        "name": "VEHICLE",
+        "id": 4,
         "trip": [
           {
             "id": 1,
@@ -73,8 +77,8 @@ function addVehicles() {
     var sidePage = document.getElementById('vehicles');
     for ( var i = 0; i < json.vehicles.length; i++) {
         var panel = '<div id="panel" class="vehicle-container">';
-        panel+= '<button type="button" class="collapsible panel-head"><h4 class="vehicle-name">'
-        panel+= json.vehicles[i].name + ' trips list</h4><i class="fas fa-minus"></i></button>'
+        panel+= '<button type="button" class="collapsible panel-head"><p class="vehicle-name">'
+        panel+= json.vehicles[i].name + '-' + json.vehicles[i].id + '</p><i class="fa fa-minus"></i></button>'
         panel+= '<div class="content" id="vehicle">'
         panel+= addTripsToVehicle(json.vehicles[i].trip)
         panel+= '</div></div>'
@@ -104,9 +108,9 @@ function addTripsToVehicle(vehicleTrips) {
  */
 function addTripDetails(trip) {
     var tripContent =  '<p>'
-    tripContent += '<label> id : </label><span>' +  trip.id + '</span></br>';
-    tripContent += '<label> startTime : </label><span>' +  trip.startTime + '</span></br>';
-    tripContent += '<label> routingLink : </label><a href="'+ trip.routingLink + '">' +  trip.routingLink + '</a>';
+    tripContent += '<label class="trip-id"> Trip Id : </label><span>' +  trip.id + '</span></br>';
+    tripContent += '<label class="trip-details"> startTime : </label><span class="trip-details">' +  trip.startTime + '</span></br>';
+    tripContent += '<label class="trip-details"> routingLink : </label><a class="trip-details" href="'+ trip.routingLink + '">' +  trip.routingLink + '</a>';
     tripContent += '</p>';
     return tripContent
 }
@@ -122,11 +126,11 @@ function addTripDetails(trip) {
       var content = this.nextElementSibling;
       if (content.style.display === "block" || content.style.display === "") {
         content.style.display = "none";
-        this.innerHTML += '<i class="fas fa-plus"></i>'
+        this.innerHTML += '<i class="fa fa-plus"></i>'
         this.removeChild(this.childNodes[1]);  
       } else {
         content.style.display = "block";
-        this.innerHTML += '<i class="fas fa-minus"></i>'
+        this.innerHTML += '<i class="fa fa-minus"></i>'
         this.removeChild(this.childNodes[1]);  
       }
     });
