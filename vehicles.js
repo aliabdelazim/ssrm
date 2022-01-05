@@ -1,82 +1,34 @@
-let json = {
-    "vehicles": [
-      {
-        "name": "Vechile 1",
-        "trip": [
-          {
-            "id": 1,
-            "startTime": 8888888,
-            "routingLink": "adasd"
-          },
-          {
-            "id": 8,
-            "startTime": 999999,
-            "routingLink": "adasd"
-          }
-        ]
-      },
-      {
-        "name": "Vechile 2",
-        "trip": [
-          {
-            "id": 1,
-            "startTime": 8888888,
-            "routingLink": "adasd"
-          },
-          {
-            "id": 3,
-            "startTime": 9999999,
-            "routingLink": "adasd"
-          }
-        ]
-      },
-      {
-        "name": "Vechile 3",
-        "trip": [
-          {
-            "id": 1,
-            "startTime": 8888888,
-            "routingLink": "adasd"
-          },
-          {
-            "id": 3,
-            "startTime": 9999999,
-            "routingLink": "adasd"
-          }
-        ]
-      },
-      {
-        "name": "Vechile 4",
-        "trip": [
-          {
-            "id": 1,
-            "startTime": 8888888,
-            "routingLink": "adasd"
-          },
-          {
-            "id": 3,
-            "startTime": 9999999,
-            "routingLink": "adasd"
-          }
-        ]
-      }
-    ]
+
+let json;
+
+
+  const url = 'http://localhost/ssrm/response.json';
+  var points = [];
+fetch(
+  url,
+  {
+      headers: { "Content-Type": "application/json" },         
+      method: "Get"
   }
+)
+.then(data => data.json())
+.then((json1) => {
+ json = json1;
+ addVehicles();
+});
 
-
-addVehicles();
 
 /**
  * adds the list of vehicles collapsables
  */
 function addVehicles() {
     var sidePage = document.getElementById('vehicles');
-    for ( var i = 0; i < json.vehicles.length; i++) {
+    for ( var i = 0; i < json.vehicleTrips.length; i++) {
         var panel = '<div id="panel" class="vehicle-container">';
         panel+= '<button type="button" class="collapsible panel-head"><h4 class="vehicle-name">'
-        panel+= json.vehicles[i].name + ' trips list</h4><i class="fas fa-minus"></i></button>'
+        panel+= json.vehicleTrips[i].vehicleId + ' trips list</h4><i class="fas fa-minus"></i></button>'
         panel+= '<div class="content" id="vehicle">'
-        panel+= addTripsToVehicle(json.vehicles[i].trip)
+        panel+= addTripsToVehicle(json.vehicleTrips[i].trips,json.vehicleTrips[i].vehicleId)
         panel+= '</div></div>'
         sidePage.innerHTML += panel;
     }
@@ -87,11 +39,11 @@ function addVehicles() {
  * @param {list of all vehicle trips} vehicleTrips 
  * @returns trips cards
  */
-function addTripsToVehicle(vehicleTrips) {
+function addTripsToVehicle(vehicleTrips,vid) {
     var trips = '';
     for (var i = 0; i < vehicleTrips.length; i++) {
         trips += '<div id="trip-card" class="trip-card">';
-        trips += addTripDetails(vehicleTrips[i]);
+        trips += addTripDetails(vehicleTrips[i],vid);
         trips += '</div>'
     }
     return trips;
@@ -102,11 +54,16 @@ function addTripsToVehicle(vehicleTrips) {
  * @param {trip details data} trip 
  * @returns trip card content
  */
-function addTripDetails(trip) {
+function addTripDetails(trip,vid) {
+    var datestart = new Date(trip.startTimeUTC);
+    var dateeta = new Date(trip.etautc);
     var tripContent =  '<p>'
-    tripContent += '<label> id : </label><span>' +  trip.id + '</span></br>';
-    tripContent += '<label> startTime : </label><span>' +  trip.startTime + '</span></br>';
-    tripContent += '<label> routingLink : </label><a href="'+ trip.routingLink + '">' +  trip.routingLink + '</a>';
+    tripContent += '<label> Id : </label><span>' +  trip.id + '</span></br>';
+    tripContent += '<label> Start Time : </label><span>' +  datestart.toString() + '</span></br>';
+    tripContent += '<label> Loaded Capacity : </label><span>' +  trip.loadedCapacity + '</span></br>';
+    tripContent += '<label> ETA" : </label><span>' +  dateeta.toString() + '</span></br>';
+    tripContent += '<label> Distance (m) : </label><span>' +  trip.distanceInMeter + '</span></br>';
+    tripContent += '<label> Link : </label><a href="#" onclick=drawRoute();>Route</a>';
     tripContent += '</p>';
     return tripContent
 }
